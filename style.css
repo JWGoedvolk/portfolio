@@ -1,47 +1,82 @@
+:root {
+    --font-size: 16px;
+}
+
+.darkmode {
+    --background-color: #262626;
+    --text-color: #bdbdbd;
+    --primary-color: #6C95EB;
+    --secondary-color: #C191FF;
+    --accent-color: #85C46C;
+    --curly-1: gold;
+    --curly-2: #DA70D6;
+    --link-unvisited-color: #3776ff;
+    --link-visited-color: #311d95;
+}
+
+.lightmode {
+    --background-color: #bdbdbd;
+    --text-color: #262626 ;
+    --primary-color: #6C95EB;
+    --secondary-color: #C191FF;
+    --accent-color: #4c9c53;
+    --curly-1: gold;
+    --curly-2: #DA70D6;
+    --link-unvisited-color: #3776ff;
+    --link-visited-color: #311d95;
+}
+
 body{
-    background-color: #262626;
-    color: #ffffff;
+    background-color: var(--background-color);
+    color: var(--text-color);
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    padding-left: 20px;
 }
 
-.about {
-    padding: 20px;
-    color: #bdbdbd;
+#theme-switch {
+    height: 50px;
+    width: 50px;
+    padding: 0px;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#theme-switch svg {
+    fill: var(--text-color);
+}
+.lightmode #theme-switch svg:last-child {
+    display: none;
+}
+.darkmode #theme-switch svg:first-child {
+    display: none;
 }
 
-.contact {
-    padding: 20px;
-    color: #bdbdbd;
+#about h2 {
+    color: var(--primary-color);
+}
+#about p {
+    color: var(--text-color);
 }
 
-.class_color {
-    color: #c191ff;
-}
-.field_color{
-    color: #66c3cc;
-}
-
-.project_index {
-    padding: 20px;
-    background-color: #262626;
-    color: #bdbdbd;
+.project_index { /* Top level div */
+    /* padding: 20px; */
+    padding-top: 0px;
 }
 .project_index_title {
     font-size: 24px;
-    margin-bottom: 10px;
+    color: var(--primary-color)
 }
 .project_index_field {
-    font-size: 18px;
-    
+    color: var(--secondary-color)
 }
 .project_image_block {
     border: #1e1e1e solid 1px;
 }
 
 .comment{
-    color: green;
+    color: var(--comment-color);
 }
 
 .indent_1 {
@@ -52,8 +87,20 @@ body{
 }
 
 .curly_1 {
-    color: #ffd60e;
+    color: var(--curly-1);
 }
 .curly_2 {
-    color: #d96f9f;
+    color: var(--curly-2);
 }
+
+
+a:link{
+    color: var(--link-unvisited-color);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--link-visited-color);
+    text-decoration: underline;
+}
+
