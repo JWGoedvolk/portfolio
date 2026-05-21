@@ -1,0 +1,44 @@
+{
+    "Projects": [
+        {
+            "name": "Fragmented",
+            "type": "University Major Project",
+            "description": "A 3D puzzle game where players manipulate fragmented pieces to solve intricate puzzles and progress through a visually stunning world.",
+            "technologies": [
+                "Unity", 
+                "C#"],
+            "github": "https://github.com/Youssef-Waeil-Khairy/Fragmented",
+            "additional_links": [
+                {
+                    "label": "Google Drive Folder",
+                    "url": "./documents/fragmented_report.pdf"
+                }
+            ],
+            "images": [
+                {
+                    "path": "./images/fragmented/image1.png",
+                    "text": "Fragmented Gameplay"
+                },
+                {
+                    "path": "./images/fragmented/image2.png",
+                    "text": "Fragmented Puzzle"
+                }
+            ]
+        },
+        {
+            "name": "Project Name",
+            "type": "Project Type",
+            "description": "A brief description of the project, highlighting its purpose, features, and any unique aspects that make it stand out.",
+            "technologies": [
+                "Technology 1", 
+                "Technology 2"],
+            "github": "",
+            "images": [
+                {
+                    "path": "./images/project2/image1.png",
+                    "text": "Image Description"
+                }
+            ]
+        }
+    ]
+}

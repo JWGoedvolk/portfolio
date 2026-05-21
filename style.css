@@ -60,16 +60,31 @@ body{
     color: var(--text-color);
 }
 
+#project-list {
+    padding: 0px;
+}
+
 .project_index { /* Top level div */
     /* padding: 20px; */
     padding-top: 0px;
+    list-style-type: none;
 }
 .project_index_title {
     font-size: 24px;
-    color: var(--primary-color)
+    color: var(--primary-color);
+    margin-bottom: 0px;
 }
 .project_index_field {
-    color: var(--secondary-color)
+    color: var(--secondary-color);
+}
+.project_text {
+    color: var(--text-color);
+}
+.description {
+    color: var(--text-color);
+    margin-top: 0px;
+    margin-bottom: 0px;
+
 }
 .project_image_block {
     border: #1e1e1e solid 1px;
@@ -80,10 +95,10 @@ body{
 }
 
 .indent_1 {
-    margin-left: 40px;
+    margin-left: 20px;
 }
 .indent_2 {
-    margin-left: 80px;
+    margin-left: 40px;
 }
 
 .curly_1 {
@@ -92,7 +107,6 @@ body{
 .curly_2 {
     color: var(--curly-2);
 }
-
 
 a:link{
     color: var(--link-unvisited-color);

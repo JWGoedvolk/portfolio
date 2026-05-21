@@ -18,6 +18,10 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+        <script src="js/jquery-4.0.0.min.js"></script>
+        <script src="js/handlebars.js"></script>
+        <script src="scripts.js"></script>
+
         <!-- Lightmode switch -->
         <button id="theme-switch">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M338.5-338.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
@@ -34,65 +38,59 @@
         </section>
 
         <!-- Add project entries here -->
-        <!-- Example project entry 
-        <div class="project_index">  
-            <h1 class="project_index_title class_color">Project Title</h1>
-            <h3 class="curly_1">{</h3>
-                <span class="project_index_field field_color indent_1">Project Type</span> <span> : University/Personal</span>
-                <br>
-                <span class="project_index_field field_color indent_1">GitHub</span> <span> : </span> <span>link goes here</span>
-                <br>
-                <span class="project_index_field field_color indent_1">Description</span> <span> : </span> <span>description goes here</span><br>
-                <span class="project_index_field field_color indent_1">Technologies Used</span> <span> : </span> <span class="curly_2">{</span>
-                    <ul>
-                        <li class="indent_2">technology 1</li>
-                        <li class="indent_2">technology 2</li>
-                    </ul>
-                <span class="indent_1 curly_2">}</span>
-                <br>
+        <ul id="project-list">
+            <!-- Project entries will be dynamically added here -->
+        </ul>
 
-                <div class="project_images indent_1">
-                    <span class="project_index_field field_color">Project Images</span> <span> : </span> <span class="curly_2">{</span>
+
+        <script id="project-template" type="text/x-handlebars-template">
+            <li class="project_index">  
+                <h1 class="project_index_title">{{name}}</h1>
+                <h3 class="curly_1">{</h3>
+                    <span class="project_index_field indent_1">Project_Type</span> <span> : {{type}}</span>
                     <br>
-                    <div class="project_image_block indent_2">
-                        <p>// Image 1 caption</p>
-                        <img src="images/image1.png" alt="Image 1" style="height: 100%; width: 100%; object-fit: contain;">
-                    </div>
-                    <span class="curly_2">}</span>
-                </div>
-
-            <h3 class="curly_1">}</h3>
-        </div> 
-        -->
-
-        <div class="project_index"> <!-- Fragmented -->
-            <h1 class="project_index_title">Fragmented</h1>
-            <h3 class="curly_1">{</h3>
-                <span class="project_index_field indent_1">Project Type</span> <span> : University</span>
-                <br>
-                <span class="project_index_field indent_1">GitHub</span> <span> : </span> <span><a href="https://github.com/JWGoedvolk/Fragmented" target="_blank">https://github.com/JWGoedvolk/Fragmented</a></span>
-                <br>
-                <span class="project_index_field indent_1">Description</span> <span> : </span> <span>description goes here</span><br>
-                <span class="project_index_field indent_1">Technologies Used</span> <span> : </span> <span class="curly_2">{</span>
-                    <ul>
-                        <li class="indent_2">technology 1</li>
-                        <li class="indent_2">technology 2</li>
-                    </ul>
-                <span class="indent_1 curly_2">}</span>
-                <br>
-
-                <div class="project_images indent_1">
-                    <span class="project_index_field field_color">Project Images</span> <span> : </span> <span class="curly_2">{</span>
+                    <span class="project_index_field indent_1">GitHub</span> <span> : </span> <span><a href="{{github}}" target="_blank">{{github}}</a></span>
                     <br>
-                    <div class="project_image_block indent_2">
-                        <p>// Image 1 caption</p>
-                        <img src="images/image1.png" alt="Image 1" style="height: 100%; width: 100%; object-fit: contain;">
+                    <span class="project_index_field indent_1">Description</span> <span> : </span>
+                    <br>
+                    <p class="indent_2 description">{{description}}</p>
+                    <br>
+                    <span class="project_index_field indent_1">Technologies_Used</span> <span> : </span> <span class="curly_2">{</span>
+                        <ul>
+                            {{#each technologies}}
+                                <li class="indent_2">{{this}}</li>
+                            {{/each}}
+                        </ul>
+                    <span class="indent_1 curly_2">}</span>
+                    <br>
+                    
+                    {{#if additional_links}}
+                    <span class="project_index_field indent_1">Additional Links</span> <span> : </span> <span class="curly_2">{
+                    <br>
+                    <ul>
+                        {{#each additional_links}}
+                            <li class="indent_2"><a href="{{url}}" target="_blank">{{label}}</a></li>
+                        {{/each}}
+                    </ul>
+                    <span class="indent_1 curly_2">}</span>
+                    {{/if}}
+                    
+                    {{#if images}}
+                    <div class="project_images indent_1">
+                        <span class="project_index_field field_color">Project Images</span> <span> : </span> <span class="curly_2">{
+                        <br>
+                        {{#each images}}
+                            <div class="project_image_block indent_2">
+                                <p>{{text}}</p>
+                                <img src="{{path}}" alt="{{text}}" style="height: 100%; width: 100%; object-fit: contain;">
+                            </div>
+                        {{/each}}
+                        <span class="curly_2">}</span>
                     </div>
-                    <span class="curly_2">}</span>
-                </div>
-
-            <h3 class="curly_1">}</h3>
-        </div>
+                    {{/if}}
+                <span class="curly_1">}</span>{{#unless isLast}}<span class="project_text">,</span>{{/unless}}
+            </li>
+        </script>
 
         <!-- Contact Section -->
         <section class="contact">

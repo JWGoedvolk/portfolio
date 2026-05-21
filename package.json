@@ -1,0 +1,24 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "my web portfolio",
+  "homepage": "https://github.com/JWGoedvolk/portfolio#readme",
+  "bugs": {
+    "url": "https://github.com/JWGoedvolk/portfolio/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JWGoedvolk/portfolio.git"
+  },
+  "license": "ISC",
+  "author": "JanWillemGoedvolk",
+  "type": "commonjs",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gulp": "^5.0.1",
+    "gulp-connect": "^5.7.0"
+  }
+}
