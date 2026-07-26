@@ -16,27 +16,24 @@
             ],
             "images": [
                 {
-                    "path": "./images/fragmented/image1.png",
-                    "text": "Fragmented Gameplay"
+                    "path": "./images/fragmented/Recording_and_Playback.mp4",
+                    "text": "Showcase of the Echo Mina mechanic. It allows the player to record their actions and play them back to solve puzzles. |new line|When we start recording for Echo Mina, we take a 'snapshot' of the current state of the game world. This snapshot includes the positions and states of all relevant objects, as well as any other necessary information to accurately recreate the scene later. |new line|When we play back the recording, we use the stored snapshot to restore the game world to its previous state. We then replay the recorded actions, allowing the player to see their past actions unfold in real-time."
                 },
                 {
-                    "path": "./images/fragmented/image2.png",
-                    "text": "Fragmented Puzzle"
-                }
-            ]
-        },
-        {
-            "name": "Project Name",
-            "type": "Project Type",
-            "description": "A brief description of the project, highlighting its purpose, features, and any unique aspects that make it stand out.",
-            "technologies": [
-                "Technology 1", 
-                "Technology 2"],
-            "github": "",
-            "images": [
+                    "path": "",
+                    "text": "There are a few interactable mechanics in the game, such as levers, buttons, objects that can be picked up and dropped and pressure plates. These interactables can all be filtered to only work for seleccted interactors like Mina, Echo Mina and the interactables (moveable objects).|line|Here are some showcases of how these interactables work:"
+                },
                 {
-                    "path": "./images/project2/image1.png",
-                    "text": "Image Description"
+                    "path": "./images/fragmented/Lever.mp4",
+                    "text": "Showcase of how the lever interactable works."
+                },
+                {
+                    "path": "./images/fragmented/Movable_Object.mp4",
+                    "text": "Showcase of how the moveable object interactable works. these objects can be used to hold down pressure plates."
+                },
+                {
+                    "path": "./images/fragmented/PreasurePlate.mp4",
+                    "text": "Showcase of how the pressure plate interactable works. It activates when stepped on and stepped off of."
                 }
             ]
         }

@@ -86,8 +86,17 @@ body{
     margin-bottom: 0px;
 
 }
-.project_image_block {
-    border: #1e1e1e solid 1px;
+
+.project_media {
+    display: block;
+    width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+}
+.text_separator {
+    border: 0;
+    border-top: 1px solid var(--text-color);
+    margin: 8px 0;
 }
 
 .comment{

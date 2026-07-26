@@ -53,7 +53,7 @@
                     <br>
                     <span class="project_index_field indent_1">Description</span> <span> : </span>
                     <br>
-                    <p class="indent_2 description">{{description}}</p>
+                    <p class="indent_2 description">{{formatText description}}</p>
                     <br>
                     <span class="project_index_field indent_1">Technologies_Used</span> <span> : </span> <span class="curly_2">{</span>
                         <ul>
@@ -77,12 +77,20 @@
                     
                     {{#if images}}
                     <div class="project_images indent_1">
-                        <span class="project_index_field field_color">Project Images</span> <span> : </span> <span class="curly_2">{
+                        <span class="project_index_field field_color">Project Media</span> <span> : </span> <span class="curly_2">{
                         <br>
                         {{#each images}}
                             <div class="project_image_block indent_2">
-                                <p>{{text}}</p>
-                                <img src="{{path}}" alt="{{text}}" style="height: 100%; width: 100%; object-fit: contain;">
+                                <p>{{formatText text}}</p>
+                                {{#if isImage}}
+                                    <img class="project_media" src="{{path}}" alt="{{text}}">
+                                {{/if}}
+                                {{#if isVideo}}
+                                    <video class="project_media" controls preload="metadata">
+                                        <source src="{{path}}" type="{{mimeType}}">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                {{/if}}
                             </div>
                         {{/each}}
                         <span class="curly_2">}</span>

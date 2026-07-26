@@ -1,21 +1,101 @@
-function imageExists(path) {
+var imageExtensions = [".apng", ".avif", ".gif", ".jpg", ".jpeg", ".png", ".svg", ".webp"];
+var videoExtensions = [".mp4", ".webm", ".ogg"];
+var videoMimeTypes = {
+    ".mp4": "video/mp4",
+    ".webm": "video/webm",
+    ".ogg": "video/ogg"
+};
+var textMarkers = {
+    "new line": "<br>",
+    "line": "<br><hr class=\"text_separator\"><br>"
+};
+
+function getFileExtension(path) {
+    var cleanPath = path
+        .split("?")[0]
+        .split("#")[0];
+
+    return cleanPath.substring(cleanPath.lastIndexOf(".")).toLowerCase();
+}
+
+function getMediaType(path) {
+    if (isTextOnlyMediaPath(path)) {
+        return "text";
+    }
+
+    var extension = getFileExtension(path);
+
+    if (imageExtensions.includes(extension)) {
+        return "image";
+    }
+
+    if (videoExtensions.includes(extension)) {
+        return "video";
+    }
+
+    return "";
+}
+
+function isTextOnlyMediaPath(path) {
+    var normalizedPath = (path || "").trim().toLowerCase();
+
+    return normalizedPath === "" || normalizedPath === "empty";
+}
+
+function getVideoMimeType(path) {
+    return videoMimeTypes[getFileExtension(path)] || "";
+}
+
+function renderTextMarker(markerName) {
+    var markerHtml = textMarkers[markerName.trim().toLowerCase()];
+
+    return markerHtml || "|" + markerName + "|";
+}
+
+function formatStyledText(text) {
+    return Handlebars.Utils.escapeExpression(text || "")
+        .replace(/\|([^|]+)\|/g, function(match, markerName) {
+            return renderTextMarker(markerName);
+        });
+}
+
+Handlebars.registerHelper("formatText", function(text) {
+    return new Handlebars.SafeString(formatStyledText(text));
+});
+
+function mediaExists(media) {
     return new Promise(function(resolve) {
-        if (!path) {
+        if (media.type === "text") {
+            resolve(true);
+            return;
+        }
+
+        if (!media.path || !media.type) {
             resolve(false);
             return;
         }
 
-        var image = new Image();
+        var element = media.type === "video"
+            ? document.createElement("video")
+            : new Image();
 
-        image.onload = function() {
+        if (media.type === "video") {
+            element.preload = "metadata";
+        }
+
+        element.onloadedmetadata = function() {
             resolve(true);
         };
 
-        image.onerror = function() {
+        element.onload = function() {
+            resolve(true);
+        };
+
+        element.onerror = function() {
             resolve(false);
         };
 
-        image.src = path;
+        element.src = media.path;
     });
 }
 
@@ -31,8 +111,17 @@ $(document).ready(function() {
             var images = project.images || [];
 
             var checkedImages = await Promise.all(images.map(async function(image) {
-                var exists = await imageExists(image.path);
-                return exists ? image : null;
+                var mediaType = getMediaType(image.path || "");
+                var media = Object.assign({}, image, {
+                    isImage: mediaType === "image",
+                    isTextOnly: mediaType === "text",
+                    isVideo: mediaType === "video",
+                    mimeType: getVideoMimeType(image.path || ""),
+                    type: mediaType
+                });
+
+                var exists = await mediaExists(media);
+                return exists ? media : null;
             }));
 
             return Object.assign({}, project, {
