@@ -3,27 +3,29 @@
 }
 
 .darkmode {
-    --background-color: #262626;
-    --text-color: #bdbdbd;
-    --primary-color: #6C95EB;
-    --secondary-color: #C191FF;
-    --accent-color: #85C46C;
-    --curly-1: gold;
-    --curly-2: #DA70D6;
-    --link-unvisited-color: #3776ff;
-    --link-visited-color: #311d95;
+    --background-color: #1e1e1e;
+    --text-color: #d4d4d4;
+    --primary-color: #4fc1ff;
+    --secondary-color: #c586c0;
+    --accent-color: #b5cea8;
+    --curly-1: #d7ba7d;
+    --curly-2: #c586c0;
+    --border-color: #3c3c3c;
+    --link-unvisited-color: #4fc1ff;
+    --link-visited-color: #d7a8ff;
 }
 
 .lightmode {
-    --background-color: #bdbdbd;
-    --text-color: #262626 ;
-    --primary-color: #6C95EB;
-    --secondary-color: #C191FF;
-    --accent-color: #4c9c53;
-    --curly-1: gold;
-    --curly-2: #DA70D6;
-    --link-unvisited-color: #3776ff;
-    --link-visited-color: #311d95;
+    --background-color: #f3f3f3;
+    --text-color: #1f1f1f;
+    --primary-color: #267f99;
+    --secondary-color: #795e26;
+    --accent-color: #098658;
+    --curly-1: #af8700;
+    --curly-2: #af00db;
+    --border-color: #d0d0d0;
+    --link-unvisited-color: #0969da;
+    --link-visited-color: #8250df;
 }
 
 body{
@@ -39,6 +41,7 @@ body{
     padding: 0px;
     border-radius: 50%;
     background-color: var(--background-color);
+    border: 1px solid var(--border-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,7 +98,7 @@ body{
 }
 .text_separator {
     border: 0;
-    border-top: 1px solid var(--text-color);
+    border-top: 1px solid var(--border-color);
     margin: 8px 0;
 }
 
@@ -127,3 +130,6 @@ a:visited {
     text-decoration: underline;
 }
 
+a:hover {
+    color: var(--accent-color);
+}

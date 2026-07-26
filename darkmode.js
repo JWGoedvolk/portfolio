@@ -1,30 +1,31 @@
-let darkmode = localStorage.getItem('darkmode');
-const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 const themeSwitch = document.getElementById('theme-switch');
+const userPrefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+const themeStorageKey = 'theme';
 
-const enableDarkMode = () => {
-    document.body.classList.replace('lightmode', 'darkmode');
-    localStorage.setItem('darkmode', 'active');
-}
+const applyTheme = (theme) => {
+    document.body.classList.toggle('darkmode', theme === 'dark');
+    document.body.classList.toggle('lightmode', theme === 'light');
+};
 
-const disableDarkMode = () => {
-    document.body.classList.replace('darkmode', 'lightmode');
-    localStorage.setItem('darkmode', null);
-}
+const getStoredTheme = () => {
+    return localStorage.getItem(themeStorageKey);
+};
 
-if (!userPrefersDark){
-    console.log("User prefers light mode");
-    disableDarkMode();
-}
+const getPreferredTheme = () => {
+    return getStoredTheme() || (userPrefersDark.matches ? 'dark' : 'light');
+};
 
-if (darkmode === "active") {
-    console.log("Dark mode is active");
-    enableDarkMode();
-}
+applyTheme(getPreferredTheme());
 
-themeSwitch.addEventListener('click', () => {
-    darkmode = localStorage.getItem('darkmode');
-    console.log("Toggling dark mode. Current state: " + darkmode);
-    darkmode !== "active" ? enableDarkMode() : disableDarkMode();
+userPrefersDark.addEventListener('change', () => {
+    if (!getStoredTheme()) {
+        applyTheme(getPreferredTheme());
+    }
 });
 
+themeSwitch.addEventListener('click', () => {
+    var nextTheme = document.body.classList.contains('darkmode') ? 'light' : 'dark';
+
+    localStorage.setItem(themeStorageKey, nextTheme);
+    applyTheme(nextTheme);
+});
