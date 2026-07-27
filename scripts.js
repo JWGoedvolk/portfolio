@@ -59,6 +59,12 @@ function formatStyledText(text) {
         });
 }
 
+function getValidLinks(links) {
+    return (links || []).filter(function(link) {
+        return (link.label || "").trim() && (link.url || "").trim();
+    });
+}
+
 Handlebars.registerHelper("formatText", function(text) {
     return new Handlebars.SafeString(formatStyledText(text));
 });
@@ -125,6 +131,7 @@ $(document).ready(function() {
             }));
 
             return Object.assign({}, project, {
+                additional_links: getValidLinks(project.additional_links),
                 images: checkedImages.filter(Boolean),
                 isLast: index === projects.length - 1
             });
